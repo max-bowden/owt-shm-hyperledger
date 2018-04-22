@@ -23,6 +23,12 @@
 	    o MIN
 	}
 
+	enum ResponseAction {
+		o IGNORED
+		o DISPATCHED
+		o SHELVED
+	}
+
 	/**
 	 * An Offshore Wind Turbine participant
 	 */
@@ -76,13 +82,25 @@
 	    --> Owt owt
 	    o DateTime raisedAt
 	    --> VibrationReading raisedBy
+		--> AlarmResponse response optional
 	}
 
-	/*
+	/**
 	 * Simple Moving Average alarm type, extends abstract alarm asset. 
 	 */
     asset SmaDeviationAlarm extends Alarm {
     }
+
+	/**
+	 * Alarm Response asset - may be added to an Alarm asset.
+	 */
+	 asset AlarmResponse identified by id {
+		 o String id
+		 o String operatorId
+		 o DateTime createdAt
+		 o ResponseAction action
+		 o String details optional
+	 }
 
 	/**
 	 * A Save Field Data transaction type used to add a new transaction to the blockchain.
@@ -93,11 +111,20 @@
 	    --> Owt owt
 	}
 	
-	
 /*
 	transaction SaveIotNodeHeartbeat {
 	    --> IotNodeHeartbeat toRegister
 	}*/
+
+/**
+ * Add a human response to an alarm
+ */
+	transaction AddAlarmResponse {
+		--> Alarm forAlarm
+		o String operatorId
+		o ResponseAction action
+		o String details optional
+	}
 	
 	
 
