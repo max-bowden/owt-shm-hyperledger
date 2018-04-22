@@ -1,19 +1,104 @@
-/**
- * Write your model definitions here
- */
+	/*
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+	namespace com.mb00541.owtshm
 
-namespace com.mb00541.owtshm
+	/**
+	 * The types of data aggregation that could be used in AggregatedFieldData
+	 */
+	enum AggregationType {
+	    o MEAN
+	    o MODE
+	    o MAX
+	    o MIN
+	}
 
-participant User identified by email {
-  o String email
-}
+	/**
+	 * An Offshore Wind Turbine participant
+	 */
+	asset Owt identified by id {
+	    o String id
+	    o Integer farm
+	    o VibrationReading[] vibrationReadings optional
+	    o Double meanOfLastNReadings
+	}
 
-asset SampleAsset identified by assetId {
-  o String assetId
-  o String value
-}
+	/**
+	 * An IoT Node participant
+	 *
+	participant IotNode identified by serialNumber {
+	    o String serialNumber
+	    o Integer sensorPositionCode
+	    --> Owt location
+	}*/
 
-transaction ChangeAssetValue {
-  o String newValue
-  --> Asset relatedAsset
-}
+	/**
+	 * Field Data asset. A Field Data is related to an OWT 
+	 */
+	asset VibrationReading identified by id {
+	    o String id
+	    o Integer sensorPositionCode
+	    o Double valueHz
+	    o DateTime taken
+	    o Boolean isAggregated
+	    o AggregationType aggregationType optional
+	    o DateTime takenTo optional
+	}
+
+
+	/**
+	 * A Iot Node Info asset. 
+	 *
+	asset IotNodeHeartbeat identified by id {
+	    o String id
+	    --> IotNode node
+	    o DateTime at
+	    o Integer batteryPercent
+	    o Boolean isHealthy
+	    o String[] logs optional
+	}*/
+	
+	/**
+	 * Alarm asset 
+	 */
+	abstract asset Alarm identified by id {
+	    o String id
+	    --> Owt owt
+	    o DateTime raisedAt
+	    --> VibrationReading raisedBy
+	}
+
+	/*
+	 * Simple Moving Average alarm type, extends abstract alarm asset. 
+	 */
+    asset SmaDeviationAlarm extends Alarm {
+    }
+
+	/**
+	 * A Save Field Data transaction type used to add a new transaction to the blockchain.
+	 * Also
+	 */
+	transaction SaveFieldData {
+	    o VibrationReading toSave
+	    --> Owt owt
+	}
+	
+	
+/*
+	transaction SaveIotNodeHeartbeat {
+	    --> IotNodeHeartbeat toRegister
+	}*/
+	
+	
+
+	transaction SetupDemo {}
