@@ -6,7 +6,7 @@ A hyperledger blockchain network to fulfil basic Offshore Wind Turbine Structura
 ## Usage
 ### To compile a new BNA:
  1. update version in package.json
- 2. from this folder, run:  composer archive create -t dir -n ./owt-shm/
+ 2. from this folder, run:  composer archive create -t dir -n .
 
 ### To run the BNA
 The easiest way to test the business network is by deploying it on HyperLedger Composer Playground.
