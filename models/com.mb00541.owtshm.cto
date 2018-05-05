@@ -41,12 +41,11 @@
 
 	/**
 	 * An IoT Node participant
-	 *
+	 */
 	participant IotNode identified by serialNumber {
 	    o String serialNumber
-	    o Integer sensorPositionCode
 	    --> Owt location
-	}*/
+	}
 
 	/**
 	 * Field Data asset. A Field Data is related to an OWT 
@@ -64,7 +63,7 @@
 
 	/**
 	 * A Iot Node Info asset. 
-	 *
+	 */
 	asset IotNodeHeartbeat identified by id {
 	    o String id
 	    --> IotNode node
@@ -72,7 +71,7 @@
 	    o Integer batteryPercent
 	    o Boolean isHealthy
 	    o String[] logs optional
-	}*/
+	}
 	
 	/**
 	 * Alarm asset 
@@ -112,9 +111,11 @@
 	}
 	
 /*
+ *
+ */
 	transaction SaveIotNodeHeartbeat {
-	    --> IotNodeHeartbeat toRegister
-	}*/
+	    o IotNodeHeartbeat toSave
+	}
 
 /**
  * Add a human response to an alarm
