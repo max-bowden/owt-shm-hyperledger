@@ -30,7 +30,7 @@
 	}
 
 	/**
-	 * An Offshore Wind Turbine participant
+	 * An Offshore Wind Turbine asset
 	 */
 	asset Owt identified by id {
 	    o String id
@@ -45,6 +45,14 @@
 	participant IotNode identified by serialNumber {
 	    o String serialNumber
 	    --> Owt location
+	}	
+
+
+         /**
+	 * An IoT Node participant
+	 */
+	participant DemoUser identified by id {
+	    o String id
 	}
 
 	/**
