@@ -49,7 +49,7 @@
 
 
          /**
-	 * An IoT Node participant
+	 * An DemoUser participant
 	 */
 	participant DemoUser identified by id {
 	    o String id
@@ -65,7 +65,7 @@
 	    o DateTime taken
 	    o Boolean isAggregated
 	    o AggregationType aggregationType optional
-	    o DateTime takenTo optional
+	    o DateTime takenTo opt ional
 	}
 
 
@@ -95,8 +95,8 @@
 	/**
 	 * Simple Moving Average alarm type, extends abstract alarm asset. 
 	 */
-    asset SmaDeviationAlarm extends Alarm {
-    }
+   	asset SmaDeviationAlarm extends Alarm {
+   	}
 
 	/**
 	 * Alarm Response asset - may be added to an Alarm asset.
@@ -109,6 +109,7 @@
 		 o String details optional
 	 }
 
+
 	/**
 	 * A Save Field Data transaction type used to add a new transaction to the blockchain.
 	 * Also
@@ -118,23 +119,21 @@
 	    --> Owt owt
 	}
 	
-/*
- *
- */
+	/*
+ 	 * Used to add an IotNodeHeartbeat asset to the ledger
+ 	 */
 	transaction SaveIotNodeHeartbeat {
 	    o IotNodeHeartbeat toSave
 	}
 
-/**
- * Add a human response to an alarm
- */
+	/**
+	 * Add a human response to an alarm
+	 */
 	transaction AddAlarmResponse {
 		--> Alarm forAlarm
 		o String operatorId
 		o ResponseAction action
 		o String details optional
 	}
-	
-	
 
 	transaction SetupDemo {}

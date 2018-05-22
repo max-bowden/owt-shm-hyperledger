@@ -74,6 +74,22 @@ void transmitData(float data[]) {
   // Send to blockchain network
   // POST to owtshm.com/api/com.mb00541.owtshm.SaveFieldData
   // Request body: 
+/*
+ {
+  "$class": "com.mb00541.owtshm.SaveFieldData",
+  "toSave": {
+    "$class": "com.mb00541.owtshm.VibrationReading",
+    "id": "21iuj9812je8991je1jiohcbjxnoppapvns",
+    "sensorPositionCode": 2,
+    "valueHz": 11.1,
+    "taken": "2018-05-21T08:59:58.464Z",
+    "isAggregated": true,
+    "aggregationType": "MEAN",
+    "takenTo": "2018-05-21T08:59:58.465Z"
+  },
+  "owt":"resource:com.mb00541.owtshm.Owt#OWT_1"
+ }
+*/
 }
 
 float* aggregateEveryOtherValue(float data[], const int n) {
