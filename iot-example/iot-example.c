@@ -162,4 +162,6 @@ PROCESS_THREAD(sensor_aggreate_proc, ev, data)
 }
 /*---------------------------------------------------------------------------*/
 
+/* General logic and structure taken from Max Bowden (my) Internet of Things COM3023 Proramming Assignment 2 */
+
 /* Accelerometer specific code courtesy of https://github.com/ejoerns/contiki-inga/wiki/Accelerometer */
